@@ -108,7 +108,7 @@ export CUDA_VISIBLE_DEVICES=0
 STG1_MODEL_DIR="/SET-A-DIR-NAME"
 
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_train \
   --encoder ${ENCODER_TYPE} --model_name_or_path ${LEXMAE_DIR} \
   --max_length 144 ${MODEL_PARAMS} \
@@ -130,7 +130,7 @@ LMD="0020"; LMD_R="0.75"; NUM_SYS="1000"; NUM_NEG="15"; NUM_EPOCH="3"; BATCH="24
 
 ```
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_prediction \
   --model_name_or_path $STG1_MODEL_DIR \
   --seed 42 --anserini_path $ANSERINI_PATH \
@@ -144,7 +144,7 @@ python3 \
 
 ```
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_hn_gen \
   --model_name_or_path $STG1_MODEL_DIR \
   --seed 42 --anserini_path $ANSERINI_PATH \
@@ -166,7 +166,7 @@ STAGE1_HN="${STG1_MODEL_DIR}-EVAL/sparse_retrieval/qid2negatives.pkl";
 MODEL_PARAMS=""; LMD="0080"; LMD_R="0.75"; NUM_SYS="200"; NUM_NEG="15"; NUM_EPOCH="3"; BATCH="24"; LR="2e-5"; SEED="42";
 
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_train \
   --encoder ${ENCODER_TYPE} --model_name_or_path ${LEXMAE_DIR} \
   --max_length 144 ${MODEL_PARAMS} \
@@ -185,7 +185,7 @@ python3 \
 #### Eval
 ```
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_prediction \
   --model_name_or_path $STG2_MODEL_DIR \
   --seed 42 --anserini_path $ANSERINI_PATH \
@@ -199,7 +199,7 @@ python3 \
 
 ```
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_hn_gen \
   --model_name_or_path $STG2_MODEL_DIR \
   --seed 42 --anserini_path $ANSERINI_PATH \
@@ -222,7 +222,7 @@ MODEL_PARAMS="--distill_reranker ${RANKER_DIR} --xentropy_sparse_loss_weight 0.2
 LMD="0080"; LMD_R="0.75"; NUM_SYS="1000"; NUM_NEG="23"; NUM_EPOCH="3"; BATCH="16"; LR="2e-5"; SEED="42";
 
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_train \
   --encoder ${ENCODER_TYPE} --model_name_or_path ${INIT_MODEL_DIR} \
   --max_length 144 ${MODEL_PARAMS} \
@@ -240,7 +240,7 @@ python3 \
 #### Eval
 ```
 python3 \
-  -m script_lexmae \
+  -m proj_sparse.train_splade_retriever \
   --do_prediction \
   --model_name_or_path $STG3_MODEL_DIR \
   --seed 42 --anserini_path $ANSERINI_PATH \

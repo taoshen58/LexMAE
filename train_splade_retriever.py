@@ -42,7 +42,7 @@ def add_training_hyperparameters(parser):
     parser.add_argument("--disable_autocast", action="store_true")
 
 
-class LexmaeLearner(LearnerMixin):
+class SpladeLearner(LearnerMixin):
     def __init__(self, model_args, config, tokenizer, encoder, query_encoder=None):
         super().__init__(model_args, config, tokenizer, encoder, query_encoder, )
 
@@ -475,7 +475,7 @@ def main():
     model = encoder
 
     if args.do_train:
-        model = LexmaeLearner(args, config, tokenizer, encoder, query_encoder=None)
+        model = SpladeLearner(args, config, tokenizer, encoder, query_encoder=None)
         with accelerator.main_process_first():
             train_dataset = DatasetMarcoPassagesRanking(
                 "train", args.data_dir, args.data_load_type, args, tokenizer, add_title=(not args.no_title))

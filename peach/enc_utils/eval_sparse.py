@@ -75,6 +75,9 @@ def evaluate_sparse_retreival(
 
     # collection embeddings: get a dict_sparse for every document [token2int]
 
+    # python_interpreter = "/home/shentao/anaconda3/envs/trans38/bin/"
+    # anserini_path = "/data/shentao/softwares/anserini"  # 0.14.0
+
     abs_output_dir = os.path.abspath(args.output_dir)
     work_dir = os.path.join(abs_output_dir, "sparse_retrieval")
 
